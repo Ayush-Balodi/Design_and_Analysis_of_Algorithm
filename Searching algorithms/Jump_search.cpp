@@ -1,28 +1,44 @@
-/*
-    Insertion sort is in-place algorithm and stable also. It is an online algorithm.
-    TC = O(n^2) in all cases 
-    SC = O(1)   in all cases
-*/
-#include<iostream>
+#include<bits/stdc++.h>
 using namespace std;
 
 bool search( int arr[] , int n , int key ){
+    int set = sqrt(n);
+    int prev = 0;
 
-    int c=0;
-    for( int i=0 ; i<n ; i++ ){
-        if( arr[i] == key ){
+    int c = 0;
+    while( arr[set-1] < key ){
+        prev = set;
+        set += sqrt(n);
+        if( set >= n ){
             c++;
-            cout << "The number of comparisons are : " << c << endl;
-            return true;
+            cout << c << endl;
+            return false;
+        }
+        //cout << c << endl;
+        c++;
+    }
+
+    while( arr[prev] < key ){
+
+        prev++;
+        
+        if( prev == set ){
+            c++;
+            cout << c << endl;
+            return false;
         }
         c++;
     }
-    cout << "The number of comparisons are : " << c << endl;
+    if( arr[prev] == key ){
+        c++;
+        cout << c << endl;
+        return true;
+    }
+    cout << c << endl;
     return false;
 }
 
 int main (){
-    
     int num;
     cout << "Enter the size of the array : ";
     cin >> num;
